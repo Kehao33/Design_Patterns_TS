@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="show-btn">SHOW MODAL</button>
+    <button id="hidden-btn">HIDDEN MODAL</button>
+
+    <script>
+      class LoginModal {
+        constructor() {
+          this.element = document.createElement("div");
+          this.element.innerHTML = `
+          <form>
+            <label> name: </label>
+            <input type="text"/>
+            <button>login</button>
+          </form>
+        `;
+
+          this.element.style.cssText =
+            "border: 1px solid #f00;height:100px;widdth:100px;position:absolute; left:50%;top:50%;ddisplay:block;";
+          document.body.appendChild(this.element);
+        }
+
+        show() {
+          this.element.style.display = "block";
+        }
+
+        hidden() {
+          this.element.style.display = "none";
+        }
+
+        static getInstance() {
+          if (!LoginModal.instance) {
+            LoginModal.instance = new LoginModal();
+          }
+
+          return LoginModal.instance;
+        }
+      }
+
+      document.getElementById("show-btn").addEventListener("click", () => {
+        LoginModal.getInstance().show();
+      });
+      document.getElementById("hidden-btn").addEventListener("click", () => {
+        LoginModal.getInstance().hidden();
+      });
+    </script>
+  </body>
+</html>

@@ -24,4 +24,10 @@
   class Student {
     constructor(public clazz: Class) {}
   }
+
+  class Heart {}
+
+  class Person {
+    constructor(public heart: Heart) {}
+  }
 }

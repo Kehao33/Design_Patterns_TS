@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form action="">
+      <select name="province" id="province"></select>
+    </form>
+    <script>
+      // 从服务器端读取数据，然后显示在select框里
+      const treeData = [
+        {
+          name: "四川",
+          key: "sichuan",
+          children: [
+            {
+              name: "成都",
+              key: "chengdu",
+            },
+            {
+              name: "泸州",
+              key: "luzhou",
+            },
+          ],
+        },
+        {
+          name: "贵州",
+          key: "guizhou",
+          children: [
+            {
+              name: "贵阳",
+              key: "guiyang",
+            },
+            {
+              name: "六盘水",
+              key: "liupanshui",
+            },
+          ],
+        },
+      ];
+
+      const flattenAdddaptor = (treeList, result = []) => {
+        treeList.forEach(({ children, key, name }) => {
+          if (children) {
+            flattenAdddaptor(children, result);
+          }
+          result.push({ name, key });
+        });
+
+        return result;
+      };
+
+      const provinceElement = document.getElementById("province");
+      const options = flattenAdddaptor(treeData)
+        .map(({ key, name }) => `<option value="${key}">${name}</option>`)
+        .join("");
+
+      provinceElement.innerHTML = options;
+    </script>
+  </body>
+</html>
